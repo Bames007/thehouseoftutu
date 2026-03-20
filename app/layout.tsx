@@ -50,9 +50,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
     creator: "@thehouseoftutu",
   },
-  alternates: {
-    canonical: getCanonicalUrl(),
-  },
+  alternates: { canonical: getCanonicalUrl() },
 };
 
 export default function RootLayout({
@@ -62,7 +60,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Store",
     name: "The House of Tutu",
-    description: metadata.description,
+    description:
+      "Discover the world's finest luxury perfumes at The House of Tutu.",
     url: getCanonicalUrl(),
     logo: getCanonicalUrl("/logo.png"),
     address: {
@@ -87,6 +86,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${gothamOffice.className} ${italiana.className} scroll-smooth`}
+      // 1. FIX: Added to prevent browser extension hydration errors
+      suppressHydrationWarning
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -106,7 +107,8 @@ export default function RootLayout({
         <CartProviderWrapper>
           <div className="min-h-screen flex flex-col">
             <Header />
-            <main role="main" className="flex-grow">
+            {/* 2. FIX: Added pt-20 to ensure content starts under the fixed header */}
+            <main role="main" className="flex-grow pt-20 md:pt-28">
               {children}
             </main>
             <Footer />

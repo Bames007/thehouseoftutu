@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, Globe, Trophy } from "lucide-react";
@@ -74,44 +74,52 @@ const Brands = () => {
     null,
   );
 
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedBrand) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [selectedBrand]);
+
   return (
     <section
       id="brands"
-      className="py-24 bg-white border-y border-black/[0.05] overflow-hidden"
+      className="py-16 md:py-24 bg-white border-y border-black/[0.05] overflow-hidden"
     >
-      <div className="container mx-auto px-6 mb-20 text-center">
+      <div className="container mx-auto px-6 mb-12 md:mb-20 text-center">
         <span
-          className={`${montserrat.className} text-[10px] tracking-[0.6em] text-[#691C33] font-bold uppercase mb-4 opacity-90`}
+          className={`${montserrat.className} text-[9px] md:text-[10px] tracking-[0.4em] md:tracking-[0.6em] text-[#691C33] font-bold uppercase mb-4 block opacity-90`}
         >
           Global Affiliates
         </span>
         <h2
-          className={`${italiana.className} text-4xl md:text-5xl text-[#1A1A1A]`}
+          className={`${italiana.className} text-3xl md:text-5xl text-[#1A1A1A]`}
         >
           The <span className="italic">Curated</span> Circle
         </h2>
       </div>
 
-      {/* Infinite Ticker */}
-      <div className="relative flex items-center mb-12 group">
+      {/* Infinite Ticker - Optimized for Touch */}
+      <div className="relative flex items-center mb-8 md:mb-12 group cursor-grab active:cursor-grabbing">
         <motion.div
-          className="flex whitespace-nowrap gap-24"
+          className="flex whitespace-nowrap gap-12 md:gap-24"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
           {[...brands, ...brands].map((brand, index) => (
             <button
               key={`${brand.name}-${index}`}
               onClick={() => setSelectedBrand(brand)}
-              className="relative h-20 w-44 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer flex-shrink-0"
+              className="relative h-16 w-32 md:h-20 md:w-44 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500 flex-shrink-0"
             >
               <Image
                 src={brand.logo}
                 alt={brand.name}
                 fill
-                className="object-cover rounded-sm"
+                className="object-contain" // Contain works better for logos of varying shapes
               />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
             </button>
           ))}
         </motion.div>
@@ -119,64 +127,71 @@ const Brands = () => {
 
       <AnimatePresence>
         {selectedBrand && (
-          <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-6">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedBrand(null)}
-              className="absolute inset-0 bg-black/90 backdrop-blur-md"
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
 
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-2xl bg-white overflow-hidden shadow-2xl rounded-sm"
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="relative w-full max-w-2xl bg-white shadow-2xl rounded-sm max-h-[90vh] overflow-y-auto"
             >
               <button
                 onClick={() => setSelectedBrand(null)}
-                className="absolute top-6 right-6 text-black/40 hover:text-black z-20"
+                className="absolute top-4 right-4 md:top-6 md:right-6 text-black/40 hover:text-black z-30 bg-white/80 rounded-full p-1"
               >
                 <X className="w-6 h-6" />
               </button>
 
-              <div className="grid md:grid-cols-2">
-                <div className="relative h-64 md:h-full bg-gray-100">
+              <div className="flex flex-col md:grid md:grid-cols-2">
+                {/* Image Section */}
+                <div className="relative h-48 md:h-full min-h-[250px] bg-[#F3F2F0]">
                   <Image
                     src={selectedBrand.logo}
                     alt={selectedBrand.name}
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute inset-0 bg-black/10" />
                 </div>
 
-                <div className="p-10 flex flex-col justify-center">
+                {/* Content Section */}
+                <div className="p-6 md:p-10 flex flex-col justify-center">
                   <h3
-                    className={`${italiana.className} text-3xl text-black mb-4`}
+                    className={`${italiana.className} text-2xl md:text-3xl text-black mb-3`}
                   >
                     {selectedBrand.name}
                   </h3>
-                  <div className="flex gap-4 mb-6">
-                    <div className="flex items-center gap-1 text-[9px] uppercase tracking-widest text-black/40">
-                      <Globe className="w-3 h-3" /> {selectedBrand.origin}
+
+                  <div className="flex flex-wrap gap-4 mb-6">
+                    <div className="flex items-center gap-1.5 text-[8px] md:text-[9px] uppercase tracking-widest text-black/50">
+                      <Globe className="w-3 h-3 text-[#691C33]" />{" "}
+                      {selectedBrand.origin}
                     </div>
-                    <div className="flex items-center gap-1 text-[9px] uppercase tracking-widest text-black/40">
-                      <Trophy className="w-3 h-3" /> {selectedBrand.founded}
+                    <div className="flex items-center gap-1.5 text-[8px] md:text-[9px] uppercase tracking-widest text-black/50">
+                      <Trophy className="w-3 h-3 text-[#691C33]" /> Est.{" "}
+                      {selectedBrand.founded}
                     </div>
                   </div>
+
                   <p
-                    className={`${montserrat.className} text-sm text-black/60 leading-relaxed mb-8 italic`}
+                    className={`${montserrat.className} text-xs md:text-sm text-black/70 leading-relaxed mb-8 italic border-l-2 border-[#691C33]/20 pl-4`}
                   >
                     "{selectedBrand.story}"
                   </p>
+
                   <div className="pt-6 border-t border-black/5">
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-[#691C33] font-bold mb-2">
+                    <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-[#691C33] font-bold mb-2">
                       Philosophy
                     </p>
                     <p
-                      className={`${italiana.className} text-xl text-black/80`}
+                      className={`${italiana.className} text-lg md:text-xl text-black/80`}
                     >
                       {selectedBrand.philosophy}
                     </p>
