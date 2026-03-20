@@ -23,7 +23,6 @@ interface ProductDetailModalProps {
 const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
   const { addToCart } = useCart();
 
-  // Prevent body scroll when modal is open
   useEffect(() => {
     if (product) {
       document.body.style.overflow = "hidden";
@@ -44,14 +43,14 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[400] flex items-center justify-center p-0 md:p-6 lg:p-12">
-        {/* Backdrop */}
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center p-0 md:p-6 lg:p-12 pointer-events-none">
+        {/* Backdrop - Enabled pointer events to allow closing on click */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-[#1A1A1A]/80 backdrop-blur-md"
+          className="absolute inset-0 bg-[#1A1A1A]/90 backdrop-blur-md pointer-events-auto"
         />
 
         {/* Modal Container */}
@@ -60,12 +59,12 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
           transition={{ type: "spring", damping: 30, stiffness: 300 }}
-          className="relative w-full max-w-6xl bg-white md:rounded-[40px] shadow-2xl overflow-hidden h-full md:h-auto max-h-screen md:max-h-[85vh] flex flex-col md:flex-row"
+          className="relative w-full max-w-6xl bg-white md:rounded-[40px] shadow-2xl overflow-hidden h-full md:h-auto max-h-screen md:max-h-[85vh] flex flex-col md:flex-row pointer-events-auto"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 z-[500] p-3 bg-white/90 backdrop-blur-md rounded-full text-black shadow-lg hover:bg-[#691C33] hover:text-white transition-all duration-500 active:scale-90"
+            className="absolute top-6 right-6 z-[501] p-3 bg-white/90 backdrop-blur-md rounded-full text-black shadow-lg hover:bg-[#691C33] hover:text-white transition-all duration-500 active:scale-90"
           >
             <X className="w-5 h-5" />
           </button>
