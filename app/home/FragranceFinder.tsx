@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
-  Sparkles,
   Wind,
   Flame,
   TreePine,
@@ -48,7 +47,7 @@ const steps = [
       {
         label: "Bright & Energetic",
         value: "citrus",
-        icon: <Sparkles className="w-5 h-5" />,
+        icon: <Wind className="w-5 h-5" />,
       },
     ],
   },

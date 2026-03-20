@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Italiana, Montserrat } from "next/font/google";
-import { SlidersHorizontal, Sparkles } from "lucide-react";
+import { AirVent, SlidersHorizontal } from "lucide-react";
 import ProductGrid from "./ProductGrid";
 
 const italiana = Italiana({ weight: "400", subsets: ["latin"] });
@@ -67,7 +67,7 @@ const Shop = ({ products = [] }: ShopProps) => {
             className="max-w-2xl"
           >
             <div className="flex items-center gap-3 mb-4">
-              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-[#691C33] opacity-50" />
+              <AirVent className="w-3 h-3 md:w-4 md:h-4 text-[#691C33] opacity-50" />
               <span
                 className={`${montserrat.className} text-[8px] md:text-[9px] tracking-[0.4em] md:tracking-[0.6em] uppercase text-[#691C33] font-bold`}
               >

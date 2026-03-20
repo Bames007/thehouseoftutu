@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
 import { Italiana, Montserrat, Reenie_Beanie } from "next/font/google";
-import { Sparkles, ArrowRight, Quote } from "lucide-react";
+import { ArrowRight, Quote, Wind } from "lucide-react";
 
 const italiana = Italiana({ weight: "400", subsets: ["latin"] });
 const montserrat = Montserrat({
@@ -104,7 +104,7 @@ const About = () => {
                 >
                   Est. 2015 — Abuja, Nigeria
                 </span>
-                <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-[#691C33] opacity-40" />
+                <Wind className="w-3 h-3 md:w-4 md:h-4 text-[#691C33] opacity-40" />
               </div>
 
               <h2

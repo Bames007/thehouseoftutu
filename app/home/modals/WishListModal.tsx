@@ -2,14 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  Heart,
-  Trash2,
-  ShoppingCart,
-  ArrowRight,
-  Sparkles,
-} from "lucide-react";
+import { X, Heart, Trash2, ShoppingCart, ArrowRight, Wind } from "lucide-react";
 import Image from "next/image";
 import { gothamOffice } from "@/app/utils/constant";
 import { useCart } from "../context/CartContext";
@@ -115,7 +108,7 @@ const WishlistModal = ({ isOpen, onClose }: WishlistModalProps) => {
                 <div className="flex items-center gap-4">
                   <div className="relative">
                     <Heart className="w-6 h-6 text-white fill-white/20 animate-pulse" />
-                    <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-white/60" />
+                    <Wind className="absolute -top-1 -right-1 w-3 h-3 text-white/60" />
                   </div>
                   <div>
                     <h2

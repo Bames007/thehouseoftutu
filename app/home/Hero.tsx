@@ -14,7 +14,6 @@ const montserrat = Montserrat({
 const Hero = () => {
   const { scrollY } = useScroll();
 
-  // Smoother Parallax for Mobile
   const y1 = useTransform(scrollY, [0, 500], [0, 100]);
   const y2 = useSpring(useTransform(scrollY, [0, 500], [0, -60]), {
     stiffness: 100,
@@ -26,10 +25,8 @@ const Hero = () => {
     <section className="relative min-h-screen lg:min-h-[110vh] flex items-center bg-[#FDFBF9] overflow-hidden pt-20 lg:pt-0">
       {/* 1. ARCHITECTURAL BACKGROUND ELEMENTS */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* The clippath is hidden on mobile to keep the focus on the product */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[#691C33] clip-path-luxury hidden lg:block opacity-95" />
 
-        {/* Scaled down "Essence" text for mobile to prevent overflow */}
         <motion.div
           style={{ y: y1 }}
           className="absolute top-10 lg:top-20 left-4 lg:left-10 text-[5rem] md:text-[8rem] lg:text-[12rem] font-bold text-black/[0.03] select-none uppercase leading-none tracking-tighter whitespace-nowrap"
@@ -98,7 +95,6 @@ const Hero = () => {
 
           {/* 3. VISUAL COMPOSITION */}
           <div className="w-full lg:w-7/12 relative h-[400px] md:h-[600px] lg:h-[750px] order-1 lg:order-2">
-            {/* Main Image Container */}
             <motion.div
               style={{ y: y2 }}
               className="relative z-20 w-full lg:w-[85%] h-full lg:ml-auto overflow-hidden shadow-2xl rounded-sm"
@@ -108,15 +104,14 @@ const Hero = () => {
                   src="/ramatu.jpeg"
                   alt="Luxury Fragrance"
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
                   priority
+                  className="object-cover"
                 />
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent lg:hidden" />
             </motion.div>
 
-            {/* Floating Detail Image - Repositioned for Tablet/Mobile Visibility */}
+            {/* Floating Detail Image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -132,37 +127,44 @@ const Hero = () => {
               />
             </motion.div>
 
-            {/* Rotating Badge - Scaled down for mobile */}
+            {/* TOP ROTATING LOGO */}
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-6 -right-4 lg:-right-12 z-40 w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 flex items-center justify-center"
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute -top-10 -right-4 lg:-right-16 z-40 w-24 h-24 md:w-32 md:h-32 lg:w-44 lg:h-44 p-4 lg:p-6"
             >
-              <svg
-                viewBox="0 0 100 100"
-                className="w-full h-full fill-[#691C33] lg:fill-[#691C33]"
-              >
-                <path
-                  id="circlePath"
-                  d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                  fill="none"
+              <div className="relative w-full h-full grayscale opacity-80 brightness-50 contrast-125 lg:brightness-100 lg:grayscale-0 lg:opacity-100">
+                <Image
+                  src="/logo-white.png"
+                  alt="The House of Tutu Logo"
+                  fill
+                  className="object-contain"
                 />
-                <text className="text-[10px] lg:text-[8.5px] uppercase tracking-[0.18em] font-bold fill-white lg:fill-current">
-                  <textPath xlinkHref="#circlePath">
-                    • Pure Essence • Limited Release • Handcrafted •
-                  </textPath>
-                </text>
-              </svg>
+              </div>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* 4. LUXURY INDICATORS - Hidden on small mobile to reduce clutter */}
-      <div className="absolute bottom-10 left-8 hidden lg:flex items-center gap-12">
-        <div className="flex flex-col items-center gap-6">
+      {/* 4. BOTTOM ROTATING LOGO & INDICATOR */}
+      <div className="absolute bottom-10 left-8 flex flex-col items-center gap-6 z-50">
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="w-16 h-16 lg:w-20 lg:h-20 opacity-30"
+        >
+          <Image
+            src="/logo.png"
+            alt="Maison Emblem"
+            width={80}
+            height={80}
+            className="object-contain grayscale"
+          />
+        </motion.div>
+
+        <div className="hidden lg:flex flex-col items-center gap-4">
           <span className="text-[9px] text-gray-400 rotate-90 tracking-[0.4em] uppercase font-bold">
-            Explore
+            Scroll
           </span>
           <motion.div
             animate={{ height: [0, 40, 0], y: [0, 10, 0] }}

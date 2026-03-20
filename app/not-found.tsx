@@ -8,7 +8,7 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import { gothamOffice, italiana } from "@/app/utils/constant";
-import { Home, RotateCw, Sparkles, Droplets } from "lucide-react";
+import { Home, RotateCw, Droplets } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function NotFound() {

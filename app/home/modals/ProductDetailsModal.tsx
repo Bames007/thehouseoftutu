@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ShoppingBag, Wind, MapPin, Sparkles } from "lucide-react";
+import { X, ShoppingBag, Wind, MapPin } from "lucide-react";
 import Image from "next/image";
 import { Italiana, Montserrat } from "next/font/google";
 import { Product } from "../Shop";

@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Search, ArrowRight, TrendingUp, Sparkles } from "lucide-react";
+import { X, Search, ArrowRight, TrendingUp, Wind } from "lucide-react";
 import { italiana, gothamOffice } from "@/app/utils/constant";
 import { useState } from "react";
 
@@ -124,7 +124,7 @@ const SearchModal = ({
                   className="hidden md:block"
                 >
                   <div className="bg-white/5 rounded-[40px] p-10 border border-white/10 relative overflow-hidden group">
-                    <Sparkles className="absolute -top-4 -right-4 w-24 h-24 text-white/5 rotate-12" />
+                    <Wind className="absolute -top-4 -right-4 w-24 h-24 text-white/5 rotate-12" />
                     <h4
                       className={`${italiana.className} text-2xl text-white mb-4`}
                     >
